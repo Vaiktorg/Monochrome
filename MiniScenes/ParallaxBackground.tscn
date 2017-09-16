@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=1]
+
+[ext_resource path="res://Images/AnimatedBG/Noise0.jpg" type="Texture" id=1]
+[ext_resource path="res://Images/AnimatedBG/Noise1.jpg" type="Texture" id=2]
+[ext_resource path="res://Images/AnimatedBG/Noise2.jpg" type="Texture" id=3]
+[ext_resource path="res://Images/AnimatedBG/Noise3.jpg" type="Texture" id=4]
+[ext_resource path="res://Images/AnimatedBG/Noise4.jpg" type="Texture" id=5]
+[ext_resource path="res://Images/AnimatedBG/Noise5.jpg" type="Texture" id=6]
+[ext_resource path="res://Images/AnimatedBG/Noise6.jpg" type="Texture" id=7]
+[ext_resource path="res://Images/AnimatedBG/Noise7.jpg" type="Texture" id=8]
+[ext_resource path="res://Images/WhiteBG.jpg" type="Texture" id=9]
+[ext_resource path="res://BG.png" type="Texture" id=10]
+[ext_resource path="res://Trees.png" type="Texture" id=11]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ { "frames":[ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ], "loop":true, "name":"Chaos", "speed":20.0 }, { "frames":[ ExtResource( 9 ) ], "loop":true, "name":"Peace", "speed":0.0 } ]
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+editor/display_folded = true
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+scroll/offset = Vector2( 0, 0 )
+scroll/base_offset = Vector2( 0, 0 )
+scroll/base_scale = Vector2( 1, 1 )
+scroll/limit_begin = Vector2( 0, 0 )
+scroll/limit_end = Vector2( 0, 0 )
+scroll/ignore_camera_zoom = true
+
+[node name="FullBG" type="ParallaxLayer" parent="."]
+
+motion/scale = Vector2( 0.1, 1 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 1024, 768 )
+__meta__ = { "_edit_group_":true }
+
+[node name="Sprite" type="AnimatedSprite" parent="FullBG"]
+
+frames = SubResource( 1 )
+animation = "Peace"
+playing = true
+centered = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+
+motion/scale = Vector2( 0.1, 1 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 1280, 0 )
+__meta__ = { "_edit_group_":true, "_edit_lock_":true }
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer"]
+
+texture = ExtResource( 10 )
+centered = false
+
+[node name="ParallaxLayer1" type="ParallaxLayer" parent="."]
+
+transform/pos = Vector2( 0, 64 )
+motion/scale = Vector2( 0.3, 1 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 1280, 0 )
+__meta__ = { "_edit_group_":true }
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer1"]
+
+texture = ExtResource( 11 )
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 0, 160 )
+motion/scale = Vector2( 0.5, 1 )
+motion/offset = Vector2( 0, 0 )
+motion/mirroring = Vector2( 1280, 0 )
+__meta__ = { "_edit_group_":true }
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer2"]
+
+texture = ExtResource( 11 )
+centered = false
+
+

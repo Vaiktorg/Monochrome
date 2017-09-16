@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://Scripts/GroundMob.gd" type="Script" id=1]
+[ext_resource path="res://Images/GroundMob.png" type="Texture" id=2]
+[ext_resource path="res://Images/slice13.png" type="Texture" id=3]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -32, 16, 0, -32, 32, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 24, 20, 0, 32, -24, 20 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 128, 32 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 32, 32 )
+
+[node name="GroundMob" type="KinematicBody2D"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 2 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+amplitude = 10
+frequency = 12
+speed = 200
+
+[node name="Body" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+
+[node name="Legs" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, 24 )
+texture = ExtResource( 3 )
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+
+build_mode = 0
+polygon = Vector2Array( -32, 16, 0, -32, 32, 16 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="Collision2" type="CollisionPolygon2D" parent="."]
+
+build_mode = 0
+polygon = Vector2Array( -24, 20, 0, 32, 24, 20 )
+shape_range = Vector2( 1, 1 )
+trigger = false
+
+[node name="Area2D" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+shape = SubResource( 3 )
+trigger = true
+_update_shape_index = 0
+
+[node name="Damage" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage"]
+
+shape = SubResource( 4 )
+trigger = true
+_update_shape_index = 0
+
+[connection signal="body_enter" from="Area2D" to="." method="_on_Area2D_body_enter"]
+
+[connection signal="body_enter" from="Damage" to="." method="_on_Damage_body_enter"]
+
+
